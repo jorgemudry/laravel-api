@@ -20,7 +20,7 @@ class ExceptionFlattener
 
     public function normalize(): FlattenException
     {
-        $exception = (new ExceptionMapper($this->exception))();
+        $exception = ExceptionMapper::fromThrowable($this->exception)->map();
         $exception = FlattenException::createFromThrowable($exception);
         $exception->setMessage($this->message($exception));
 

@@ -25,7 +25,7 @@ class ErrorResponseBuilder
             ],
             'error' => [
                 'message' => $this->exception->getMessage(),
-                'type' => (new ReflectionClass($this->exception->getClass()))->getShortName(),
+                'type' => (new ReflectionClass($this->exception))->getShortName(),
             ],
         ];
 

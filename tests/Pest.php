@@ -1,4 +1,5 @@
 <?php
+//phpcs:ignorefile
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ uses(
 */
 
 expect()->extend('toBeOne', function () {
+    /** @phpstan-ignore-next-line */
     return $this->toBe(1);
 });
 
@@ -42,7 +44,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function something(): void
 {
     // ..
 }

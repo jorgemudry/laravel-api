@@ -13,32 +13,42 @@ use Throwable;
 
 class ExceptionMapper
 {
-    public function __invoke(Throwable $exception): Throwable
+    public function __construct(protected Throwable $exception)
     {
-        $instanceof = $exception::class;
+    }
+
+    public static function fromThrowable(Throwable $exception): self
+    {
+        return new self($exception);
+    }
+
+    public function map(): Throwable
+    {
+        $instanceof = $this->exception::class;
+        $exception = $this->exception;
 
         switch ($instanceof) {
             case ModelNotFoundException::class:
                 $exception = new NotFoundHttpException(
-                    message: $exception->getMessage(),
-                    previous: $exception,
-                    code: $exception->getCode()
+                    message: $$this->exception->getMessage(),
+                    previous: $$this->exception,
+                    code: $$this->exception->getCode()
                 );
                 break;
             case AuthorizationException::class:
                 $exception = new HttpException(
                     statusCode: 403,
-                    message: $exception->getMessage(),
-                    previous: $exception,
-                    code: $exception->getCode()
+                    message: $$this->exception->getMessage(),
+                    previous: $$this->exception,
+                    code: $$this->exception->getCode()
                 );
                 break;
             case AuthenticationException::class:
                 $exception = new HttpException(
                     statusCode: 401,
-                    message: $exception->getMessage(),
-                    previous: $exception,
-                    code: $exception->getCode()
+                    message: $$this->exception->getMessage(),
+                    previous: $$this->exception,
+                    code: $$this->exception->getCode()
                 );
                 break;
         }
