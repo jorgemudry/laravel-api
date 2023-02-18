@@ -5,17 +5,9 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
-use ReflectionClass;
-use Symfony\Component\ErrorHandler\Exception\FlattenException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -25,7 +17,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
      */
-    protected array $levels = [
+    protected $levels = [
 
     ];
 
@@ -34,7 +26,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, class-string<\Throwable>>
      */
-    protected array $dontReport = [
+    protected $dontReport = [
         AuthorizationException::class,
         ModelNotFoundException::class,
         ValidationException::class,
@@ -45,7 +37,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, string>
      */
-    protected array $dontFlash = [
+    protected $dontFlash = [
         'current_password',
         'password',
         'password_confirmation',
@@ -56,60 +48,10 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e): void {
+        $this->renderable(function (Throwable $e) {
+            $exception = ExceptionFlattener::fromThrowable($e)->normalize();
+
+            return (new ErrorResponseBuilder($exception))->response();
         });
-
-        $this->renderable(function (Throwable $e, Request $request) {
-            $instanceof = $e::class;
-
-            switch ($instanceof) {
-                case ModelNotFoundException::class:
-                    $e = new NotFoundHttpException($e->getMessage(), $e);
-                    break;
-                case AuthorizationException::class:
-                    $e = new HttpException(403, $e->getMessage());
-                    break;
-                case AuthenticationException::class:
-                    $e = new HttpException(401, $e->getMessage());
-                    break;
-            }
-
-            $fe = FlattenException::createFromThrowable($e);
-            $fe->setMessage($this->getExceptionMessage($fe));
-
-            $response = [
-                'metadata' => [
-                    'code' => $fe->getStatusCode(),
-                    'message' => Response::$statusTexts[$fe->getStatusCode()],
-                ],
-                'error' => [
-                    'message' => $fe->getMessage(),
-                    'type' => (new ReflectionClass($fe->getClass()))->getShortName(),
-                ],
-            ];
-
-            if (config('app.debug')) {
-                $response['error']['file'] = $fe->getFile();
-                $response['error']['line'] = $fe->getLine();
-                $response['error']['trace'] = $fe->getTrace();
-            }
-
-            return new JsonResponse($response, $response['metadata']['code'], $fe->getHeaders());
-        });
-    }
-
-    protected function getExceptionMessage(FlattenException $fe): string
-    {
-        $message = $fe->getMessage();
-
-        if (empty($message) === false) {
-            return $message;
-        }
-
-        if ($fe->getStatusCode() === 404) {
-            return 'Sorry, the page you are looking for could not be found.';
-        }
-
-        return 'Whoops, looks like something went wrong.';
     }
 }
