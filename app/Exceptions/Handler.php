@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
@@ -32,9 +33,9 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        // AuthorizationException::class,
-        // ModelNotFoundException::class,
-        // ValidationException::class,
+        AuthorizationException::class,
+        ModelNotFoundException::class,
+        ValidationException::class,
     ];
 
     /**
@@ -60,7 +61,6 @@ class Handler extends ExceptionHandler
         $this->renderable(function (Throwable $e, Request $request) {
             $instanceof = get_class($e);
 
-            dd($instanceof);
             switch ($instanceof) {
                 case ModelNotFoundException::class:
                     $e = new NotFoundHttpException($e->getMessage(), $e);
@@ -68,14 +68,13 @@ class Handler extends ExceptionHandler
                 case AuthorizationException::class:
                     $e = new HttpException(403, $e->getMessage());
                     break;
+                case AuthenticationException::class:
+                    $e = new HttpException(401, $e->getMessage());
+                    break;
             }
 
             $fe = FlattenException::createFromThrowable($e);
-            $message = $fe->getMessage();
-
-            if (empty($message)) {
-                $fe->setMessage('Whoops, looks like something went wrong.');
-            }
+            $fe->setMessage($this->getExceptionMessage($fe));
 
             $response = [
                 'metadata' => [
@@ -96,5 +95,20 @@ class Handler extends ExceptionHandler
 
             return new JsonResponse($response, $response['metadata']['code'], $fe->getHeaders());
         });
+    }
+
+    protected function getExceptionMessage(FlattenException $fe): string
+    {
+        $message = $fe->getMessage();
+
+        if (false === empty($message)) {
+            return $message;
+        }
+
+        if ($fe->getStatusCode() == 404) {
+            return 'Sorry, the page you are looking for could not be found.';
+        }
+
+        return 'Whoops, looks like something went wrong.';
     }
 }
