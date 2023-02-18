@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
@@ -23,8 +25,8 @@ class Handler extends ExceptionHandler
      *
      * @var array<class-string<\Throwable>, \Psr\Log\LogLevel::*>
      */
-    protected $levels = [
-        //
+    protected array $levels = [
+
     ];
 
     /**
@@ -32,7 +34,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, class-string<\Throwable>>
      */
-    protected $dontReport = [
+    protected array $dontReport = [
         AuthorizationException::class,
         ModelNotFoundException::class,
         ValidationException::class,
@@ -43,7 +45,7 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, string>
      */
-    protected $dontFlash = [
+    protected array $dontFlash = [
         'current_password',
         'password',
         'password_confirmation',
@@ -54,12 +56,11 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->reportable(function (Throwable $e): void {
         });
 
         $this->renderable(function (Throwable $e, Request $request) {
-            $instanceof = get_class($e);
+            $instanceof = $e::class;
 
             switch ($instanceof) {
                 case ModelNotFoundException::class:
@@ -101,11 +102,11 @@ class Handler extends ExceptionHandler
     {
         $message = $fe->getMessage();
 
-        if (false === empty($message)) {
+        if (empty($message) === false) {
             return $message;
         }
 
-        if ($fe->getStatusCode() == 404) {
+        if ($fe->getStatusCode() === 404) {
             return 'Sorry, the page you are looking for could not be found.';
         }
 
