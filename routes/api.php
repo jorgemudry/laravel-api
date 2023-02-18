@@ -18,6 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => app()->version());
 
-Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->get('/users', fn (Request $request) => $request->user());
