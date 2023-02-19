@@ -50,6 +50,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "post-install-cmd": [
+            "./dev/hooks/install"
         ]
     },
     "extra": {

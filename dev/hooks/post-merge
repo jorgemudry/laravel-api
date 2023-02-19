@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+ROOT_DIR=$(git rev-parse --show-toplevel)
+# Run composer install
+${ROOT_DIR}/composer install --prefer-dist --ignore-platform-reqs --optimize-autoloader

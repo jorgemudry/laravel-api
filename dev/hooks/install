@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+if test -t 1; then
+    ncolors=$(tput colors)
+
+    if test -n "$ncolors" && test "$ncolors" -ge 8; then
+        BOLD="$(tput bold)"
+        YELLOW="$(tput setaf 3)"
+        GREEN="$(tput setaf 2)"
+        RED="$(tput setaf 1)"
+        NC="$(tput sgr0)"
+    fi
+fi
+
+UNAMEOUT="$(uname -s)"
+REPO_ROOT_DIR=$(git rev-parse --show-toplevel)
+
+if [ "$(pwd)" != ${REPO_ROOT_DIR} ]; then
+    echo "${BOLD}${YELLOW}WARNING:${NC} ${YELLOW}This operation must be executed in the root directory of the repository (where the .git directory is)${NC}" >&2
+
+    exit 1
+fi
+
+case "${UNAMEOUT}" in
+    Linux*)             MACHINE=linux;;
+    Darwin*)            MACHINE=mac;;
+    *)                  MACHINE="UNKNOWN"
+esac
+
+if [ "$MACHINE" == "UNKNOWN" ]; then
+    echo "${BOLD}${RED}ERROR:${NC} ${RED}The OS [$(uname -s)] is not suppoerted and git hooks were not installed. Supported OS: macOS, Linux, and Windows (WSL2)${NC}" >&2
+
+    exit 1
+fi
+
+echo "${GREEN}Installing hooks...${NC}" >&2
+echo ""
+PRE_COMMIT_HOOK="${REPO_ROOT_DIR}"/.git/hooks/pre-commit
+POST_MERGE_HOOK="${REPO_ROOT_DIR}"/.git/hooks/post-merge
+
+if [[ -f "${PRE_COMMIT_HOOK}" ]]; then
+    echo "${GREEN}Removing old pre-commit hook...${NC}" >&2
+    rm "${PRE_COMMIT_HOOK}"
+    echo "${GREEN}Removed!${NC}" >&2
+    echo ""
+fi
+
+if [[ -f "${POST_MERGE_HOOK}" ]]; then
+    echo "${GREEN}Removing old post-merge hook...${NC}" >&2
+    rm "${POST_MERGE_HOOK}"
+    echo "${GREEN}Removed!${NC}" >&2
+    echo ""
+fi
+
+echo "${GREEN}Installing newest pre-commit hook...${NC}" >&2
+cp "${REPO_ROOT_DIR}"/dev/hooks/pre-commit "${REPO_ROOT_DIR}"/.git/hooks/pre-commit
+echo "${GREEN}pre-commit installed!${NC}" >&2
+echo ""
+
+echo "${GREEN}Installing newest post-merge hook...${NC}" >&2
+cp "${REPO_ROOT_DIR}"/dev/hooks/post-merge "${REPO_ROOT_DIR}"/.git/hooks/post-merge
+echo "${GREEN}post-merge installed!${NC}" >&2
+
+exit 0
