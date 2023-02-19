@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "jorgemudry/laravel-api",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "The Laravel Framework optimized for APIs.",
+    "keywords": ["framework", "laravel", "api"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
