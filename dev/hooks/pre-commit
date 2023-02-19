@@ -28,14 +28,14 @@ function __run() #(step, name, cmd)
     fi
 }
 
-modified="git diff --diff-filter=M --name-only --cached  | grep \".php$\""
+FILES="git diff --diff-filter=M --name-only --cached  | grep '.php$'"
 pint="vendor/bin/pint"
 phpstan="vendor/bin/phpstan analyse"
 pest="vendor/bin/pest"
 
-if [ -n "$modified" ]; then
-    __run "1/4" "php lint" "${modified} | xargs -r php -l"
-    __run "2/4" "code sniffer" "${modified} | xargs -r ${pint}"
-    __run "3/4" "phpstan" "${modified} | xargs -r ${phpstan}"
+if [[ -n $FILES ]]; then
+    __run "1/4" "php lint" "${FILES} | xargs -r php -l"
+    __run "2/4" "code sniffer" "${FILES} | xargs -r ${pint}"
+    __run "3/4" "phpstan" "${FILES} | xargs -r ${phpstan}"
     __run "4/4" "tests" "${pest}"
 fi
