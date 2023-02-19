@@ -1,7 +1,7 @@
 {
     "name": "jorgemudry/laravel-api",
     "type": "project",
-    "description": "The Laravel Framework optimized for APIs.",
+    "description": "A Laravel version with some tweaks to make it more API oriented, to be used for new projects.",
     "keywords": ["framework", "laravel", "api"],
     "license": "MIT",
     "require": {
