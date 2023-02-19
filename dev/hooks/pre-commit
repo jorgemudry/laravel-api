@@ -33,7 +33,9 @@ pint="vendor/bin/pint"
 phpstan="vendor/bin/phpstan analyse"
 pest="vendor/bin/pest"
 
-__run "1/4" "php lint" "${modified} | xargs -r php -l"
-__run "2/4" "code sniffer" "${modified} | xargs -r ${pint}"
-__run "3/4" "phpstan" "${modified} | xargs -r ${phpstan}"
-__run "4/4" "tests" "${pest}"
+if [ -n "$modified" ]; then
+    __run "1/4" "php lint" "${modified} | xargs -r php -l"
+    __run "2/4" "code sniffer" "${modified} | xargs -r ${pint}"
+    __run "3/4" "phpstan" "${modified} | xargs -r ${phpstan}"
+    __run "4/4" "tests" "${pest}"
+fi
