@@ -31,10 +31,7 @@ uses(
 |
 */
 
-expect()->extend('toBeOne', function () {
-    /** @phpstan-ignore-next-line */
-    return $this->toBe(1);
-});
+expect()->extend('toBeOne', fn () => $this->toBe(1));
 
 /*
 |--------------------------------------------------------------------------

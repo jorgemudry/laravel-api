@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 use ReflectionClass;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 
@@ -21,20 +20,23 @@ class ErrorResponseBuilder
         return new self($exception);
     }
 
-    public function build(): JsonResponse
+    public function build(bool $debug = false): JsonResponse
     {
+        /** @var class-string $previous */
+        $previous = $this->exception->getClass();
+
         $response = [
             'metadata' => [
                 'code' => $this->exception->getStatusCode(),
-                'message' => Response::$statusTexts[$this->exception->getStatusCode()],
+                'message' => $this->exception->getStatusText(),
             ],
             'error' => [
                 'message' => $this->exception->getMessage(),
-                'type' => (new ReflectionClass($this->exception))->getShortName(),
+                'type' => (new ReflectionClass($previous))->getShortName(),
             ],
         ];
 
-        if (config('app.debug')) {
+        if ($debug) {
             $response['error']['file'] = $this->exception->getFile();
             $response['error']['line'] = $this->exception->getLine();
             $response['error']['trace'] = $this->exception->getTrace();

@@ -13,18 +13,18 @@ if test -t 1; then
 fi
 
 REPO_ROOT_DIR=$(git rev-parse --show-toplevel)
-FILES=$(git diff --diff-filter=M --name-only --cached  | grep '.php$')
+FILES=$(git diff --diff-filter=ACMR --name-only --cached  | grep '\.php$')
 
 if [[ -n $FILES ]]; then
     echo "${GREEN}Running PHP Lint...${NC}"
-    for file in "${FILES[@]}"
+    for file in $FILES
     do
         php -l "$file" || exit 1
     done
 
     echo ""
     echo "${GREEN}Running Laravel Pint...${NC}"
-    for file in "${FILES[@]}"
+    for file in $FILES
     do
         "${REPO_ROOT_DIR}"/vendor/bin/pint "$file"
         git add "$file";
@@ -32,9 +32,9 @@ if [[ -n $FILES ]]; then
 
     echo ""
     echo "${GREEN}Running PHP Stan...${NC}"
-    for file in "${FILES[@]}"
+    for file in $FILES
     do
-        "${REPO_ROOT_DIR}"/vendor/bin/phpstan analyse "$file"
+        "${REPO_ROOT_DIR}"/vendor/bin/phpstan analyse "$file" --memory-limit=256M || exit 1
     done
 
     echo ""

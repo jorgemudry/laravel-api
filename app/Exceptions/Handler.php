@@ -50,8 +50,9 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function (Throwable $e) {
             $exception = ExceptionFlattener::fromThrowable($e)->flatten();
+            $debug = boolval(config('app.debug'));
 
-            return ErrorResponseBuilder::fromFlatten($exception)->build();
+            return ErrorResponseBuilder::fromFlatten($exception)->build(debug: $debug);
         });
     }
 }
