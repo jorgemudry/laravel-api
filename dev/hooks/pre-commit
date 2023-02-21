@@ -22,6 +22,7 @@ if [[ -n $FILES ]]; then
         php -l "$file" || exit 1
     done
 
+    echo ""
     echo "${GREEN}Running Laravel Pint...${NC}"
     for file in "${FILES[@]}"
     do
@@ -29,12 +30,14 @@ if [[ -n $FILES ]]; then
         git add "$file";
     done
 
+    echo ""
     echo "${GREEN}Running PHP Stan...${NC}"
     for file in "${FILES[@]}"
     do
         "${REPO_ROOT_DIR}"/vendor/bin/phpstan analyse "$file"
     done
 
+    echo ""
     echo "${GREEN}Running Unit/Feature tests...${NC}"
     "${REPO_ROOT_DIR}"/vendor/bin/pest || exit 1
 fi
