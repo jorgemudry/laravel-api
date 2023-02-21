@@ -30,25 +30,25 @@ class ExceptionMapper
         switch ($instanceof) {
             case ModelNotFoundException::class:
                 $exception = new NotFoundHttpException(
-                    message: $$this->exception->getMessage(),
-                    previous: $$this->exception,
-                    code: $$this->exception->getCode()
+                    message: $this->exception->getMessage(),
+                    previous: $this->exception,
+                    code: $this->exception->getCode()
                 );
                 break;
             case AuthorizationException::class:
                 $exception = new HttpException(
                     statusCode: 403,
-                    message: $$this->exception->getMessage(),
-                    previous: $$this->exception,
-                    code: $$this->exception->getCode()
+                    message: $this->exception->getMessage(),
+                    previous: $this->exception,
+                    code: $this->exception->getCode()
                 );
                 break;
             case AuthenticationException::class:
                 $exception = new HttpException(
                     statusCode: 401,
-                    message: $$this->exception->getMessage(),
-                    previous: $$this->exception,
-                    code: $$this->exception->getCode()
+                    message: $this->exception->getMessage(),
+                    previous: $this->exception,
+                    code: $this->exception->getCode()
                 );
                 break;
         }
