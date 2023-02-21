@@ -12,30 +12,29 @@ if test -t 1; then
     fi
 fi
 
-function __run() #(step, name, cmd)
-{
-    local color output exitcode
-
-    printf "${YELLOW}[%s]${NC} %-20s" "$1" "$2"
-    output=$(eval "$3" 2>&1)
-    exitcode=$?
-
-    if [[ 0 == $exitcode || 130 == $exitcode ]]; then
-        echo -e "${GREEN}OK!${NC}"
-    else
-        echo -e "${RED}NOK!${NC}\n\n$output"
-        exit 1
-    fi
-}
-
-FILES="git diff --diff-filter=M --name-only --cached  | grep '.php$'"
-pint="vendor/bin/pint"
-phpstan="vendor/bin/phpstan analyse"
-pest="vendor/bin/pest"
+REPO_ROOT_DIR=$(git rev-parse --show-toplevel)
+FILES=$(git diff --diff-filter=M --name-only --cached  | grep '.php$')
 
 if [[ -n $FILES ]]; then
-    __run "1/4" "php lint" "${FILES} | xargs -r php -l"
-    __run "2/4" "code sniffer" "${FILES} | xargs -r ${pint}"
-    __run "3/4" "phpstan" "${FILES} | xargs -r ${phpstan}"
-    __run "4/4" "tests" "${pest}"
+    echo "${GREEN}Running PHP Lint...${NC}"
+    for file in "${FILES[@]}"
+    do
+        php -l "$file" || exit 1
+    done
+
+    echo "${GREEN}Running Laravel Pint...${NC}"
+    for file in "${FILES[@]}"
+    do
+        "${REPO_ROOT_DIR}"/vendor/bin/pint "$file"
+        git add "$file";
+    done
+
+    echo "${GREEN}Running PHP Stan...${NC}"
+    for file in "${FILES[@]}"
+    do
+        "${REPO_ROOT_DIR}"/vendor/bin/phpstan analyse "$file"
+    done
+
+    echo "${GREEN}Running Unit/Feature tests...${NC}"
+    "${REPO_ROOT_DIR}"/vendor/bin/pest || exit 1
 fi
