@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\ServiceAliveController;
+use App\Http\Controllers\ServiceReadyController;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => app()->version());
+Route::get('/', function () {
+    /** @var Application $app */
+    $app = app();
+
+    return $app->version();
+});
+Route::get('/service/ready', ServiceReadyController::class);
+Route::get('/service/alive', ServiceAliveController::class);
 
 Route::middleware('auth:sanctum')->get('/users', fn (Request $request) => $request->user());
