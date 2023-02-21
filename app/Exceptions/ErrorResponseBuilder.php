@@ -16,7 +16,12 @@ class ErrorResponseBuilder
     ) {
     }
 
-    public function response(): JsonResponse
+    public static function fromFlatten(FlattenException $exception): self
+    {
+        return new self($exception);
+    }
+
+    public function build(): JsonResponse
     {
         $response = [
             'metadata' => [
@@ -35,6 +40,10 @@ class ErrorResponseBuilder
             $response['error']['trace'] = $this->exception->getTrace();
         }
 
-        return new JsonResponse($response, $response['metadata']['code'], $this->exception->getHeaders());
+        return new JsonResponse(
+            $response,
+            $response['metadata']['code'],
+            $this->exception->getHeaders()
+        );
     }
 }

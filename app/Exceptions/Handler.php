@@ -49,9 +49,9 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (Throwable $e) {
-            $exception = ExceptionFlattener::fromThrowable($e)->normalize();
+            $exception = ExceptionFlattener::fromThrowable($e)->flatten();
 
-            return (new ErrorResponseBuilder($exception))->response();
+            return ErrorResponseBuilder::fromFlatten($exception)->build();
         });
     }
 }

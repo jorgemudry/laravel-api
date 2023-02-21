@@ -18,7 +18,7 @@ class ExceptionFlattener
         return new self($exception);
     }
 
-    public function normalize(): FlattenException
+    public function flatten(): FlattenException
     {
         $exception = ExceptionMapper::fromThrowable($this->exception)->map();
         $exception = FlattenException::createFromThrowable($exception);

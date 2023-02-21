@@ -1,7 +1,7 @@
 {
     "name": "jorgemudry/laravel-api",
     "type": "project",
-    "description": "A Laravel version with some tweaks to make it more API oriented, to be used for new projects.",
+    "description": "A Laravel version to be used on new projects, with some tweaks to make it more API oriented.",
     "keywords": ["framework", "laravel", "api"],
     "license": "MIT",
     "require": {
