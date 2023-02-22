@@ -17,25 +17,22 @@ FILES=$(git diff --diff-filter=ACMR --name-only --cached  | grep '\.php$')
 
 if [[ -n $FILES ]]; then
     echo "${GREEN}Running PHP Lint...${NC}"
-    for file in $FILES
-    do
+    while read -r file; do
         php -l "$file" || exit 1
-    done
+    done <<< "$FILES"
 
     echo ""
     echo "${GREEN}Running Laravel Pint...${NC}"
-    for file in $FILES
-    do
-        "${REPO_ROOT_DIR}"/vendor/bin/pint "$file"
+    while read -r file; do
+        "${REPO_ROOT_DIR}"/vendor/bin/pint "$file";
         git add "$file";
-    done
+    done <<< "$FILES"
 
     echo ""
     echo "${GREEN}Running PHP Stan...${NC}"
-    for file in $FILES
-    do
+    while read -r file; do
         "${REPO_ROOT_DIR}"/vendor/bin/phpstan analyse "$file" --memory-limit=256M || exit 1
-    done
+    done <<< "$FILES"
 
     echo ""
     echo "${GREEN}Running Unit/Feature tests...${NC}"
