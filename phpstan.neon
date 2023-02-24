@@ -12,7 +12,10 @@ parameters:
     # - vendor/mockery/mockery/library/helpers.php
 
   ignoreErrors:
-    - '#Class PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\LineLengthSniff not found.#'
+    -
+      message: '#Class PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\LineLengthSniff not found.#'
+      path: phpinsights.php
+
     # Pest implicitly binds $this to the current test case
     # @see https://pestphp.com/docs/underlying-test-case
     -
