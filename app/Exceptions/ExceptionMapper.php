@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException as LaravelAuthorizationException;
+use Illuminate\Auth\AuthenticationException as LaravelAuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Validation\ValidationException as LaravelValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -25,7 +25,6 @@ class ExceptionMapper
     public function map(): Throwable
     {
         $instanceof = $this->exception::class;
-        $exception = $this->exception;
 
         switch ($instanceof) {
             case ModelNotFoundException::class:
@@ -35,23 +34,31 @@ class ExceptionMapper
                     code: $this->exception->getCode()
                 );
 
-            case AuthorizationException::class:
-                return new HttpException(
-                    statusCode: 403,
+            case LaravelAuthorizationException::class:
+                return new AuthorizationException(
                     message: $this->exception->getMessage(),
                     previous: $this->exception,
                     code: $this->exception->getCode()
                 );
 
-            case AuthenticationException::class:
-                return new HttpException(
-                    statusCode: 401,
+            case LaravelAuthenticationException::class:
+                return new AuthenticationException(
                     message: $this->exception->getMessage(),
                     previous: $this->exception,
                     code: $this->exception->getCode()
+                );
+
+            case LaravelValidationException::class:
+                /** @var LaravelValidationException $exception */
+                $exception = $this->exception;
+
+                return new ValidationException(
+                    errors: $exception->errors(),
+                    previous: $exception,
+                    code: $exception->getCode()
                 );
         }
 
-        return $exception;
+        return $this->exception;
     }
 }

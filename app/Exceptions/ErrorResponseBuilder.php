@@ -36,6 +36,12 @@ class ErrorResponseBuilder
             ],
         ];
 
+        if ($previous === ValidationException::class) {
+            $errors = json_decode($this->exception->getMessage(), true);
+            $response['error']['message'] = $errors['message'];
+            $response['error']['fields'] = $errors['fields'];
+        }
+
         if ($debug) {
             $response['error']['file'] = $this->exception->getFile();
             $response['error']['line'] = $this->exception->getLine();

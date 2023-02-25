@@ -8,6 +8,7 @@ use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
+use SlevomatCodingStandard\Sniffs\Classes\SuperfluousExceptionNamingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
 use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowShortTernaryOperatorSniff;
@@ -101,6 +102,14 @@ return [
         UnusedParameterSniff::class => [
             'exclude' => [
                 'app/Console/Kernel.php',
+            ],
+        ],
+        SuperfluousExceptionNamingSniff::class => [
+            'exclude' => [
+                'app/Exceptions/ApiException.php',
+                'app/Exceptions/AuthenticationException.php',
+                'app/Exceptions/AuthorizationException.php',
+                'app/Exceptions/ValidationException.php',
             ],
         ],
     ],
