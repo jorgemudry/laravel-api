@@ -25,19 +25,6 @@ Route::get('/', function () {
 
     return $app->version();
 });
-Route::get('/validation', function (Request $request): void {
-    $request->validate([
-        'email' => [
-            'required',
-            'email',
-        ],
-        'password' => [
-            'required',
-            'string',
-            'min:8',
-        ],
-    ]);
-});
 Route::get('/service/ready', ServiceReadyController::class);
 Route::get('/service/alive', ServiceAliveController::class);
 

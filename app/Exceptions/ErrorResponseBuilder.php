@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Illuminate\Http\JsonResponse;
-use ReflectionClass;
+use App\Http\Resources\ExceptionResource;
 use Symfony\Component\ErrorHandler\Exception\FlattenException;
 
 class ErrorResponseBuilder
@@ -20,38 +19,13 @@ class ErrorResponseBuilder
         return new self($exception);
     }
 
-    public function build(bool $debug = false): JsonResponse
+    public function build(bool $debug = false): ExceptionResource
     {
-        /** @var class-string $previous */
-        $previous = $this->exception->getClass();
+        $this->exception->setHeaders(array_merge(
+            $this->exception->getHeaders(),
+            ['x-app-debug' => $debug]
+        ));
 
-        $response = [
-            'metadata' => [
-                'code' => $this->exception->getStatusCode(),
-                'message' => $this->exception->getStatusText(),
-            ],
-            'error' => [
-                'message' => $this->exception->getMessage(),
-                'type' => (new ReflectionClass($previous))->getShortName(),
-            ],
-        ];
-
-        if ($previous === ValidationException::class) {
-            $errors = json_decode($this->exception->getMessage(), true);
-            $response['error']['message'] = $errors['message'];
-            $response['error']['fields'] = $errors['fields'];
-        }
-
-        if ($debug) {
-            $response['error']['file'] = $this->exception->getFile();
-            $response['error']['line'] = $this->exception->getLine();
-            $response['error']['trace'] = $this->exception->getTrace();
-        }
-
-        return new JsonResponse(
-            $response,
-            $response['metadata']['code'],
-            $this->exception->getHeaders()
-        );
+        return new ExceptionResource($this->exception);
     }
 }
