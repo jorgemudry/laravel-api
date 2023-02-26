@@ -1,41 +1,4 @@
 #!/usr/bin/env bash
 
-# if test -t 1; then
-#     ncolors=$(tput colors)
-
-#     if test -n "$ncolors" && test "$ncolors" -ge 8; then
-#         BOLD="$(tput bold)"
-#         YELLOW="$(tput setaf 3)"
-#         GREEN="$(tput setaf 2)"
-#         RED="$(tput setaf 1)"
-#         NC="$(tput sgr0)"
-#     fi
-# fi
-
 REPO_ROOT_DIR=$(git rev-parse --show-toplevel)
 php "${REPO_ROOT_DIR}"/artisan dev:precommit
-# FILES=$(git diff --diff-filter=ACMR --name-only --cached  | grep '\.php$')
-
-# if [[ -n $FILES ]]; then
-#     echo "${GREEN}Running PHP Lint...${NC}"
-#     while read -r file; do
-#         php -l "$file" || exit 1
-#     done <<< "$FILES"
-
-#     echo ""
-#     echo "${GREEN}Running Laravel Pint...${NC}"
-#     while read -r file; do
-#         "${REPO_ROOT_DIR}"/vendor/bin/pint "$file";
-#         git add "$file";
-#     done <<< "$FILES"
-
-#     echo ""
-#     echo "${GREEN}Running PHP Stan...${NC}"
-#     while read -r file; do
-#         "${REPO_ROOT_DIR}"/vendor/bin/phpstan analyse "$file" --memory-limit=256M || exit 1
-#     done <<< "$FILES"
-
-#     echo ""
-#     echo "${GREEN}Running Unit/Feature tests...${NC}"
-#     "${REPO_ROOT_DIR}"/vendor/bin/pest || exit 1
-# fi
