@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Insights\CyclomaticComplexityIsHigh;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenDefineFunctions;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
@@ -116,6 +117,9 @@ return [
                 'app/Exceptions/AuthorizationException.php',
                 'app/Exceptions/ValidationException.php',
             ],
+        ],
+        CyclomaticComplexityIsHigh::class => [
+            'maxComplexity' => 10,
         ],
     ],
 
