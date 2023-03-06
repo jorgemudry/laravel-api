@@ -7,12 +7,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('failed_jobs', function (Blueprint $table): void {
+            // Table properties.
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_unicode_ci';
+
+            // Columns.
             $table->id();
             $table->string('uuid')->unique();
             $table->text('connection');
@@ -23,9 +25,6 @@ return new class () extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('failed_jobs');
