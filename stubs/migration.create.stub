@@ -10,7 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('{{ table }}', function (Blueprint $table) {
+        Schema::create('{{ table }}', static function (Blueprint $table): void {
             // Table properties.
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

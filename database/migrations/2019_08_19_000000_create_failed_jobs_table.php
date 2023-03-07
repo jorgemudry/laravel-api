@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::create('failed_jobs', function (Blueprint $table): void {
+        Schema::create('failed_jobs', static function (Blueprint $table): void {
             // Table properties.
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

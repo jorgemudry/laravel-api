@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Schema;
 return new class () extends Migration {
     public function up(): void
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table): void {
+        Schema::create('personal_access_tokens', static function (Blueprint $table): void {
             // Table properties.
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
 
             // Columns.
             $table->id();
-            $table->morphs('tokenable');
+            $table->ulidMorphs('tokenable');
             $table->string('name');
             $table->string('token', 64);
             $table->text('abilities')->nullable();

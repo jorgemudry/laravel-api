@@ -28,4 +28,4 @@ Route::get('/', function () {
 Route::get('/service/ready', ServiceReadyController::class);
 Route::get('/service/alive', ServiceAliveController::class);
 
-Route::middleware('auth:sanctum')->get('/users', fn (Request $request) => $request->user());
+Route::middleware('auth:rta')->get('/users', fn (Request $request) => $request->user());
