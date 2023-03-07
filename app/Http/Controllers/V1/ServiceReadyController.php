@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\V1;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Redis;
 use Predis\Client;
 
-class ServiceReadyController extends Controller
+class ServiceReadyController
 {
     public function __invoke(): JsonResponse
     {
