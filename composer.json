@@ -20,10 +20,10 @@
         "laravel/sail": "^1.21.2",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^6.4",
+        "nunomaduro/larastan": "^2.5",
         "nunomaduro/phpinsights": "^2.7",
         "pestphp/pest": "^1.22.5",
         "pestphp/pest-plugin-laravel": "^1.4",
-        "phpstan/phpstan": "^1.10.6",
         "phpunit/phpunit": "^9.6.5"
     },
     "autoload": {
