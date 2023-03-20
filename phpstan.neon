@@ -26,11 +26,4 @@ parameters:
       paths:
         - tests/*
 
-    # Pest custom expectations are dynamic and not conducive static analysis
-    # @see https://pestphp.com/docs/expectations#custom-expectations
-    -
-      message: '#Call to an undefined method Pest\\Expectation|Pest\\Support\\Extendable::#'
-      paths:
-        - tests/*
-
   checkMissingIterableValueType: false
