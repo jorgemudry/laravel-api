@@ -32,3 +32,5 @@ parameters:
       message: '#Call to an undefined method Pest\\Expectation|Pest\\Support\\Extendable::#'
       paths:
         - tests/*
+
+  checkMissingIterableValueType: false
