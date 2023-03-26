@@ -1,0 +1,33 @@
+name: Update Composer dependencies
+
+on:
+  schedule:
+    - cron: '25 4 * * *'
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Update dependencies
+        run: composer update
+
+      - name: Bump dependencies
+        run: composer bump
+
+      - name: Update dependencies
+        run: composer update
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add composer.lock
+          git add composer.json
+          git commit -m "Update/Bump composer dependencies"
+          git push
