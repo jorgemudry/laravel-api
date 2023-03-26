@@ -2,7 +2,7 @@ name: Update Composer dependencies
 
 on:
   schedule:
-    - cron: '30 4 * * *'
+    - cron: '0 5 * * *'
 
 jobs:
   update-dependencies:
@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_ACTIONS_TOKEN }}
 
       - name: Install dependencies
         run: composer install
