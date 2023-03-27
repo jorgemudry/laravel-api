@@ -2,7 +2,7 @@ name: Update Composer dependencies
 
 on:
   schedule:
-    - cron: '35 5 * * *'
+    - cron: '35 5 * * 4'
 
 jobs:
   update-dependencies:
