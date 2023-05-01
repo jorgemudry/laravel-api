@@ -184,6 +184,7 @@ return [
         /*
          * Package Service Providers...
          */
+        // App\Providers\PrometheusServiceProvider::class,
 
         /*
          * Application Service Providers...
