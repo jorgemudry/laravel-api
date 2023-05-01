@@ -11,7 +11,8 @@
         "laravel/framework": "^10.9.0",
         "laravel/sanctum": "^3.2.3",
         "laravel/tinker": "^2.8.1",
-        "predis/predis": "^2.1.2"
+        "predis/predis": "^2.1.2",
+        "promphp/prometheus_client_php": "^2.7"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
