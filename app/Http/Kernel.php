@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Treblle\Middlewares\TreblleMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -37,6 +38,9 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             // \Illuminate\Routing\Middleware\ThrottleRequestsWithRedis::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // TreblleMiddleware::class,
+            'cache.headers:public;max_age=2628000;etag',
+            \App\Http\Middleware\GzipEncodeResponse::class,
         ],
     ];
 
