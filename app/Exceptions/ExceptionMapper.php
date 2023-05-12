@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Illuminate\Auth\Access\AuthorizationException as LaravelAuthorizationException;
-use Illuminate\Auth\AuthenticationException as LaravelAuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Validation\ValidationException as LaravelValidationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Throwable;
 
 class ExceptionMapper
@@ -22,43 +23,51 @@ class ExceptionMapper
         return new self($exception);
     }
 
-    public function map(): Throwable
+    public function map(FlattenException $exception): FlattenException
+    {
+        $exception = $this->setStatusCode($exception);
+
+        return $this->setMessage($exception);
+    }
+
+    protected function setStatusCode(FlattenException $exception): FlattenException
     {
         $instanceof = $this->exception::class;
 
         switch ($instanceof) {
             case ModelNotFoundException::class:
-                return new NotFoundHttpException(
-                    message: $this->exception->getMessage(),
-                    previous: $this->exception,
-                    code: $this->exception->getCode()
-                );
+                $exception->setStatusCode(Response::HTTP_NOT_FOUND);
+                break;
 
-            case LaravelAuthorizationException::class:
-                return new AuthorizationException(
-                    message: $this->exception->getMessage(),
-                    previous: $this->exception,
-                    code: $this->exception->getCode()
-                );
+            case AuthorizationException::class:
+                $exception->setStatusCode(Response::HTTP_FORBIDDEN);
+                break;
 
-            case LaravelAuthenticationException::class:
-                return new AuthenticationException(
-                    message: $this->exception->getMessage(),
-                    previous: $this->exception,
-                    code: $this->exception->getCode()
-                );
-
-            case LaravelValidationException::class:
-                /** @var LaravelValidationException $exception */
-                $exception = $this->exception;
-
-                return new ValidationException(
-                    errors: $exception->errors(),
-                    previous: $exception,
-                    code: $exception->getCode()
-                );
+            case AuthenticationException::class:
+                $exception->setStatusCode(Response::HTTP_UNAUTHORIZED);
+                break;
+            case ValidationException::class:
+                $exception->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
+                break;
         }
 
-        return $this->exception;
+        return $exception;
+    }
+
+    protected function setMessage(FlattenException $exception): FlattenException
+    {
+        $message = $exception->getMessage();
+
+        if (empty($message) === false) {
+            return $exception;
+        }
+
+        $exception->setMessage('Whoops, looks like something went wrong.');
+
+        if ($exception->getStatusCode() === 404) {
+            $exception->setMessage('Sorry, the page you are looking for could not be found.');
+        }
+
+        return $exception;
     }
 }

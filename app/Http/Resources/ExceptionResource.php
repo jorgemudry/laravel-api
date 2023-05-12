@@ -4,21 +4,17 @@ declare(strict_types=1);
 
 namespace App\Http\Resources;
 
-use App\Exceptions\ValidationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Validation\ValidationException;
 use ReflectionClass;
 
+/**
+ * @mixin \Symfony\Component\ErrorHandler\Exception\FlattenException
+ */
 class ExceptionResource extends JsonResource
 {
-    /**
-     * The "data" wrapper that should be applied.
-     *
-     * @var string|null
-     */
-    public static $wrap = 'error';
-
     /**
      * Transform the resource into an array.
      *
@@ -31,14 +27,20 @@ class ExceptionResource extends JsonResource
         $headers = $this->getHeaders();
 
         $response = [
-            'message' => $this->getMessage(),
+            'status' => $this->getStatusCode(),
             'type' => (new ReflectionClass($previous))->getShortName(),
+            'error' => $this->getMessage(),
         ];
 
         if ($previous === ValidationException::class) {
-            $errors = json_decode((string) $this->getMessage(), true, 512, JSON_THROW_ON_ERROR);
-            $response['message'] = $errors['message'];
-            $response['fields'] = $errors['fields'];
+            /** @var ValidationException $exception */
+            $exception = $this->getPrevious();
+
+            $response['error'] = 'Some fields failed to pass validation.';
+            $response['fields'] = $exception->errors();
+            $headers = [...$headers, 'X-Status-Reason' => 'Validation failed.'];
+
+            $this->setHeaders($headers);
         }
 
         if (array_key_exists('x-app-debug', $headers) && $headers['x-app-debug']) {
@@ -62,5 +64,12 @@ class ExceptionResource extends JsonResource
         }
 
         $response->setStatusCode($this->getStatusCode());
+        $content = json_decode(
+            strval($response->getContent()),
+            true,
+            512,
+            JSON_THROW_ON_ERROR
+        );
+        $response->setContent(strval(json_encode($content['data'], JSON_THROW_ON_ERROR)));
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -49,7 +50,8 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (Throwable $e) {
-            $exception = ExceptionFlattener::fromThrowable($e)->flatten();
+            $exception = FlattenException::createFromThrowable($e);
+            $exception = ExceptionMapper::fromThrowable($e)->map($exception);
             $debug = boolval(config('app.debug'));
 
             return ErrorResponseBuilder::fromFlatten($exception)->build(debug: $debug);

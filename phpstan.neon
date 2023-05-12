@@ -13,9 +13,6 @@ parameters:
 
   ignoreErrors:
     -
-      message: '#Call to an undefined method App\\Http\\Resources#'
-      path: app/Http/Resources/*
-    -
       message: '#Class PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\LineLengthSniff not found.#'
       path: phpinsights.php
 
