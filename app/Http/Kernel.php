@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
-        \App\Http\Middleware\ResourceResponseMiddleware::class,
+        // \App\Http\Middleware\ResourceResponseMiddleware::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
@@ -40,7 +40,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // TreblleMiddleware::class,
             'cache.headers:public;max_age=2628000;etag',
-            \App\Http\Middleware\GzipEncodeResponse::class,
+            \App\Http\Middleware\EncodingResponse::class,
         ],
     ];
 

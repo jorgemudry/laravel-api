@@ -17,7 +17,7 @@ class Prom extends Facade
         // static::swap(new Fake());
     }
 
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return CollectorRegistry::class;
     }
