@@ -21,8 +21,8 @@ class ValidationException extends ApiException
         $message = strval(json_encode([
             'message' => 'Some fields failed to pass validation.',
             'fields' => $errors,
-        ]));
-        $headers = array_merge($headers, ['X-Status-Reason' => 'Validation failed.']);
+        ], JSON_THROW_ON_ERROR));
+        $headers = [...$headers, 'X-Status-Reason' => 'Validation failed.'];
 
         parent::__construct(422, $message, $previous, $headers, $code);
     }

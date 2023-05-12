@@ -36,7 +36,7 @@ class ExceptionResource extends JsonResource
         ];
 
         if ($previous === ValidationException::class) {
-            $errors = json_decode($this->getMessage(), true);
+            $errors = json_decode((string) $this->getMessage(), true, 512, JSON_THROW_ON_ERROR);
             $response['message'] = $errors['message'];
             $response['fields'] = $errors['fields'];
         }

@@ -21,13 +21,13 @@ class ResourceResponseMiddleware
         $response = $next($request);
 
         if ($response instanceof JsonResponse) {
-            $content = json_decode(strval($response->getContent()), true);
+            $content = json_decode(strval($response->getContent()), true, 512, JSON_THROW_ON_ERROR);
             $content['metadata'] = [
                 'code' => $response->getStatusCode(),
                 'message' => Response::$statusTexts[$response->getStatusCode()],
             ];
             $content = $this->parsePagination($content);
-            $response->setContent(strval(json_encode($content)));
+            $response->setContent(strval(json_encode($content, JSON_THROW_ON_ERROR)));
         }
 
         return $response;
