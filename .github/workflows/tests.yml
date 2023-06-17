@@ -8,6 +8,8 @@ jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
+    env:
+      TREBLLE_API_KEY: ${{ secrets.TREBLLE_API_KEY }}
     steps:
       - uses: actions/checkout@v3
 
