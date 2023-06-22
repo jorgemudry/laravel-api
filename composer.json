@@ -18,12 +18,12 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.23.0",
-        "laravel/pint": "^1.10.2",
+        "laravel/pint": "^1.10.3",
         "mockery/mockery": "^1.6.2",
-        "nunomaduro/collision": "^7.5.2",
+        "nunomaduro/collision": "^7.6.0",
         "nunomaduro/larastan": "^2.6.3",
         "nunomaduro/phpinsights": "^2.8",
-        "pestphp/pest": "^2.6.3",
+        "pestphp/pest": "^2.8.1",
         "pestphp/pest-plugin-laravel": "^2.0",
         "rector/rector": "^0.16.0"
     },
