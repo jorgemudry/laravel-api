@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use App\Exceptions\ErrorResponseBuilder;
+use App\Exceptions\FlattenException;
 use App\Http\Resources\ExceptionResource;
-use Symfony\Component\ErrorHandler\Exception\FlattenException;
 
 it('creates a new instance from the static method', function (): void {
     $exception = new FlattenException();

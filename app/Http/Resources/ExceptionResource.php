@@ -8,10 +8,11 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Validation\ValidationException;
+use JsonException;
 use ReflectionClass;
 
 /**
- * @mixin \Symfony\Component\ErrorHandler\Exception\FlattenException
+ * @mixin \App\Exceptions\FlattenException
  */
 class ExceptionResource extends JsonResource
 {
@@ -22,20 +23,16 @@ class ExceptionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /** @var class-string $previous */
-        $previous = $this->getClass();
+        $exception = $this->getOriginalException();
         $headers = $this->getHeaders();
 
         $response = [
             'status' => $this->getStatusCode(),
-            'type' => (new ReflectionClass($previous))->getShortName(),
+            'type' => (new ReflectionClass($exception))->getShortName(),
             'error' => $this->getMessage(),
         ];
 
-        if ($previous === ValidationException::class) {
-            /** @var ValidationException $exception */
-            $exception = $this->getPrevious();
-
+        if ($exception::class === ValidationException::class) {
             $response['error'] = 'Some fields failed to pass validation.';
             $response['fields'] = $exception->errors();
             $headers = [...$headers, 'X-Status-Reason' => 'Validation failed.'];
@@ -54,6 +51,7 @@ class ExceptionResource extends JsonResource
 
     /**
      * Customize the outgoing response for the resource.
+     * @throws JsonException
      */
     public function withResponse(Request $request, JsonResponse $response): void
     {

@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // TreblleMiddleware::class,
             'cache.headers:public;max_age=2628000;etag',
-            \App\Http\Middleware\EncodingResponse::class,
+            \App\Http\Middleware\EncodingResponse::class, // comment this when using vapor/lambda
         ],
     ];
 

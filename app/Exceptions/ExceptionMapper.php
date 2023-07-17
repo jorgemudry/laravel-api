@@ -9,7 +9,6 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\ErrorHandler\Exception\FlattenException;
 use Throwable;
 
 class ExceptionMapper

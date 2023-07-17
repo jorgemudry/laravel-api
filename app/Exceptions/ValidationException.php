@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use JsonException;
 use Throwable;
 
 class ValidationException extends ApiException
@@ -11,6 +12,7 @@ class ValidationException extends ApiException
     /**
      * @param array<string, string> $errors
      * @param array<string, string> $headers
+     * @throws JsonException
      */
     public function __construct(
         array $errors,

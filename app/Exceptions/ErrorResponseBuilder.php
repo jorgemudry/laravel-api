@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Exceptions;
 
 use App\Http\Resources\ExceptionResource;
-use Symfony\Component\ErrorHandler\Exception\FlattenException;
 
 class ErrorResponseBuilder
 {
