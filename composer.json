@@ -8,12 +8,12 @@
         "php": "^8.1",
         "bugsnag/bugsnag-laravel": "^2.26",
         "guzzlehttp/guzzle": "^7.8.0",
-        "laravel/framework": "^10.22.0",
-        "laravel/sanctum": "^3.3.0",
+        "laravel/framework": "^10.23.1",
+        "laravel/sanctum": "^3.3.1",
         "laravel/tinker": "^2.8.2",
-        "predis/predis": "^2.2.1",
+        "predis/predis": "^2.2.2",
         "promphp/prometheus_client_php": "^2.7.1",
-        "treblle/treblle-laravel": "^4.2.0"
+        "treblle/treblle-laravel": "^4.3.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
@@ -23,7 +23,7 @@
         "nunomaduro/collision": "^7.8.1",
         "nunomaduro/larastan": "^2.6.4",
         "nunomaduro/phpinsights": "^2.8",
-        "pestphp/pest": "^2.17.0",
+        "pestphp/pest": "^2.18.2",
         "pestphp/pest-plugin-laravel": "^2.2",
         "rector/rector": "^0.16.0"
     },
