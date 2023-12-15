@@ -16,7 +16,7 @@ class PreCommitCommand extends Command
     protected const PHP_LINT_COMMAND = 'php -l %s';
     protected const PINT_COMMAND = '%s/vendor/bin/pint %s';
     protected const PHP_STAN_COMMAND = '%s/vendor/bin/phpstan analyse %s --memory-limit=256M';
-    protected const PEST_COMMAND = '%s/vendor/bin/pest';
+    protected const PEST_COMMAND = './vendor/bin/pest --parallel';
 
     /**
      * The name and signature of the console command.
@@ -65,7 +65,20 @@ class PreCommitCommand extends Command
         }
 
         $this->components->info('Running Unit/Feature tests...');
-        $process = Process::run(sprintf(self::PEST_COMMAND, rtrim(base_path(), '/')));
+
+        $process = Process::path(base_path())
+            ->env([
+                'APP_ENV' => 'testing',
+                'BCRYPT_ROUNDS' => '4',
+                'CACHE_DRIVER' => 'array',
+                'DB_CONNECTION' => 'sqlite',
+                'DB_DATABASE' => ':memory:',
+                'MAIL_MAILER' => 'array',
+                'QUEUE_CONNECTION' => 'sync',
+                'SESSION_DRIVER' => 'array',
+                'TELESCOPE_ENABLED' => 'false',
+            ])->run(self::PEST_COMMAND);
+
         $this->info($process->output());
 
         return $process->exitCode() ?? Command::FAILURE;
