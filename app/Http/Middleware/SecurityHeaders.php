@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class SecurityHeaders
 {
-    /** @var array<int, string> $unwantedHeaders */
+    /** @var array<int, string> */
     private array $unwantedHeaders = ['X-Powered-By', 'server', 'Server'];
 
     public function handle(Request $request, Closure $next): mixed
@@ -61,7 +61,7 @@ class SecurityHeaders
     }
 
     /**
-     * @param array<int, string> $headers
+     * @param  array<int, string>  $headers
      */
     private function removeUnwantedHeaders(array $headers): void
     {

@@ -18,11 +18,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
-        \App\Http\Middleware\TrustProxies::class,
+        Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \App\Http\Middleware\TrimStrings::class,
-        \App\Http\Middleware\SecurityHeaders::class,
+        Middleware\TrimStrings::class,
+        Middleware\SecurityHeaders::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // TreblleMiddleware::class,
             'cache.headers:public;max_age=2628000;etag',
-            \App\Http\Middleware\EncodingResponse::class, // comment this when using vapor/lambda
+            Middleware\EncodingResponse::class, // comment this when using vapor/lambda
         ],
     ];
 
@@ -51,10 +51,10 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth' => Middleware\Authenticate::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'signed' => \App\Http\Middleware\ValidateSignature::class,
+        'signed' => Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

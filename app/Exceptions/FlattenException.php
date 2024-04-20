@@ -14,7 +14,7 @@ class FlattenException extends BaseFlattenException
 {
     protected Throwable $original;
 
-    public static function createFromThrowable(Throwable $exception, int $statusCode = null, array $headers = []): static
+    public static function createFromThrowable(Throwable $exception, ?int $statusCode = null, array $headers = []): static
     {
 
         $e = new static(); /** @phpstan-ignore-line */

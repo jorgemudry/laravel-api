@@ -10,13 +10,14 @@ use Throwable;
 class ValidationException extends ApiException
 {
     /**
-     * @param array<string, string> $errors
-     * @param array<string, string> $headers
+     * @param  array<string, string>  $errors
+     * @param  array<string, string>  $headers
+     *
      * @throws JsonException
      */
     public function __construct(
         array $errors,
-        Throwable|null $previous = null,
+        ?Throwable $previous = null,
         array $headers = [],
         int $code = 0,
     ) {

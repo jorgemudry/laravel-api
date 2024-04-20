@@ -14,7 +14,7 @@ it('creates a new instance from the static method', function (): void {
 });
 
 it('returns a ExceptionResource from the build method', function (): void {
-    $exception = FlattenException::createFromThrowable(new \Exception('This is my exception message.'), 500);
+    $exception = FlattenException::createFromThrowable(new Exception('This is my exception message.'), 500);
     $builder = ErrorResponseBuilder::fromFlatten($exception);
 
     expect($builder->build())->toBeInstanceOf(ExceptionResource::class);

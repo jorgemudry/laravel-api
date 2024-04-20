@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
 it('returns a ExceptionMapper from fromThrowable method', function (): void {
-    $instance = ExceptionMapper::fromThrowable(new \InvalidArgumentException('Some exception message'));
+    $instance = ExceptionMapper::fromThrowable(new InvalidArgumentException('Some exception message'));
 
     expect($instance)->toBeInstanceOf(ExceptionMapper::class);
 });
@@ -70,7 +70,7 @@ it('maps ValidationException to 422', function (): void {
 });
 
 it('maps generic Exception to 500', function (): void {
-    $exception = new \Exception();
+    $exception = new Exception();
     $flattenException = FlattenException::createFromThrowable($exception);
 
     $mapper = ExceptionMapper::fromThrowable($exception);

@@ -12,10 +12,15 @@ use Throwable;
 class PreCommitCommand extends Command
 {
     protected const GIT_DIFF_COMMAND = 'git diff --diff-filter=ACMR --name-only --cached  | grep \'\.php$\'';
+
     protected const GIT_ADD_COMMAND = 'git add %s';
+
     protected const PHP_LINT_COMMAND = 'php -l %s';
+
     protected const PINT_COMMAND = '%s/vendor/bin/pint %s';
+
     protected const PHP_STAN_COMMAND = '%s/vendor/bin/phpstan analyse %s --memory-limit=256M';
+
     protected const PEST_COMMAND = './vendor/bin/pest --parallel';
 
     /**
@@ -85,7 +90,7 @@ class PreCommitCommand extends Command
     }
 
     /**
-     * @param array<Int, String> $files
+     * @param  array<int, string>  $files
      */
     protected function runPhpLint(array $files): void
     {
@@ -103,7 +108,7 @@ class PreCommitCommand extends Command
     }
 
     /**
-     * @param array<Int, String> $files
+     * @param  array<int, string>  $files
      */
     protected function runPint(array $files): void
     {
@@ -124,7 +129,7 @@ class PreCommitCommand extends Command
     }
 
     /**
-     * @param array<Int, String> $files
+     * @param  array<int, string>  $files
      */
     protected function runPhpStan(array $files): void
     {

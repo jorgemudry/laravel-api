@@ -51,6 +51,7 @@ class ExceptionResource extends JsonResource
 
     /**
      * Customize the outgoing response for the resource.
+     *
      * @throws JsonException
      */
     public function withResponse(Request $request, JsonResponse $response): void
