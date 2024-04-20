@@ -13,14 +13,13 @@
         },
         "declare_parentheses": true,
         "declare_strict_types": true,
-        "explicit_string_variable": true,
+        "explicit_string_variable": false,
         "fully_qualified_strict_types": true,
         "global_namespace_import": {
             "import_classes": true,
             "import_constants": true,
             "import_functions": true
         },
-        "is_null": true,
         "lambda_not_used_import": true,
         "logical_operators": true,
         "mb_str_functions": true,
