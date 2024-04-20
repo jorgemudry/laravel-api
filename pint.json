@@ -41,6 +41,9 @@
             "identical": false,
             "less_and_greater": false
         },
-        "ordered_imports": true
+        "ordered_imports": true,
+        "phpdoc_align": {
+            "align": "left"
+        }
     }
 }

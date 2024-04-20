@@ -90,7 +90,7 @@ class PreCommitCommand extends Command
     }
 
     /**
-     * @param  array<int, string>  $files
+     * @param array<int, string> $files
      */
     protected function runPhpLint(array $files): void
     {
@@ -108,7 +108,7 @@ class PreCommitCommand extends Command
     }
 
     /**
-     * @param  array<int, string>  $files
+     * @param array<int, string> $files
      */
     protected function runPint(array $files): void
     {
@@ -129,7 +129,7 @@ class PreCommitCommand extends Command
     }
 
     /**
-     * @param  array<int, string>  $files
+     * @param array<int, string> $files
      */
     protected function runPhpStan(array $files): void
     {

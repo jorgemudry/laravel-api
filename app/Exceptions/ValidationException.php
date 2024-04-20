@@ -10,8 +10,8 @@ use Throwable;
 class ValidationException extends ApiException
 {
     /**
-     * @param  array<string, string>  $errors
-     * @param  array<string, string>  $headers
+     * @param array<string, string> $errors
+     * @param array<string, string> $headers
      *
      * @throws JsonException
      */

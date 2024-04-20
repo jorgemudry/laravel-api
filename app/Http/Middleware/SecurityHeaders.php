@@ -61,7 +61,7 @@ class SecurityHeaders
     }
 
     /**
-     * @param  array<int, string>  $headers
+     * @param array<int, string> $headers
      */
     private function removeUnwantedHeaders(array $headers): void
     {
