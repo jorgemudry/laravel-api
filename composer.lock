@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb0c5cca6db6bb0d1993866eeabd90eb",
+    "content-hash": "7d5b6c37b8a0ca1d3f2364f45dfe81ec",
     "packages": [
         {
             "name": "brick/math",
@@ -1306,16 +1306,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.8",
+            "version": "v10.48.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8e9ab6da362f268170fe815127aed5ec7d303697"
+                "reference": "ad758500b47964d022addf119600a1b1b0230733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8e9ab6da362f268170fe815127aed5ec7d303697",
-                "reference": "8e9ab6da362f268170fe815127aed5ec7d303697",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ad758500b47964d022addf119600a1b1b0230733",
+                "reference": "ad758500b47964d022addf119600a1b1b0230733",
                 "shasum": ""
             },
             "require": {
@@ -1509,20 +1509,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-04-16T14:26:04+00:00"
+            "time": "2024-04-23T15:01:33+00:00"
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.1.19",
+            "version": "v0.1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "0ab75ac3434d9f610c5691758a6146a3d1940c18"
+                "reference": "bf9a360c484976692de0f3792f30066f4f4b34a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/0ab75ac3434d9f610c5691758a6146a3d1940c18",
-                "reference": "0ab75ac3434d9f610c5691758a6146a3d1940c18",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/bf9a360c484976692de0f3792f30066f4f4b34a2",
+                "reference": "bf9a360c484976692de0f3792f30066f4f4b34a2",
                 "shasum": ""
             },
             "require": {
@@ -1564,9 +1564,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.1.19"
+                "source": "https://github.com/laravel/prompts/tree/v0.1.20"
             },
-            "time": "2024-04-16T14:20:35+00:00"
+            "time": "2024-04-18T00:45:25+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5858,22 +5858,22 @@
         },
         {
             "name": "treblle/treblle-laravel",
-            "version": "4.5.4",
+            "version": "4.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Treblle/treblle-laravel.git",
-                "reference": "790c24b1722c41eb7e8605a6dcb543c651daf3ed"
+                "reference": "eeb984fe1ca4ba257c2047bdac018f7f74cf91a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Treblle/treblle-laravel/zipball/790c24b1722c41eb7e8605a6dcb543c651daf3ed",
-                "reference": "790c24b1722c41eb7e8605a6dcb543c651daf3ed",
+                "url": "https://api.github.com/repos/Treblle/treblle-laravel/zipball/eeb984fe1ca4ba257c2047bdac018f7f74cf91a8",
+                "reference": "eeb984fe1ca4ba257c2047bdac018f7f74cf91a8",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^8.1",
-                "treblle/utils": "^0.3.0"
+                "treblle/utils": "^0.3.1"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "^7.7.0",
@@ -5925,22 +5925,22 @@
             ],
             "support": {
                 "issues": "https://github.com/Treblle/treblle-laravel/issues",
-                "source": "https://github.com/Treblle/treblle-laravel/tree/4.5.4"
+                "source": "https://github.com/Treblle/treblle-laravel/tree/4.5.5"
             },
-            "time": "2024-04-08T08:46:16+00:00"
+            "time": "2024-04-19T12:15:11+00:00"
         },
         {
             "name": "treblle/utils",
-            "version": "0.3.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Treblle/php-utils.git",
-                "reference": "08fab51e4a5335f2e081ec8eaaa18b6fbea75ce6"
+                "reference": "8115ccd50174d68b2b397bf3d5c50a4ae0f944d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Treblle/php-utils/zipball/08fab51e4a5335f2e081ec8eaaa18b6fbea75ce6",
-                "reference": "08fab51e4a5335f2e081ec8eaaa18b6fbea75ce6",
+                "url": "https://api.github.com/repos/Treblle/php-utils/zipball/8115ccd50174d68b2b397bf3d5c50a4ae0f944d4",
+                "reference": "8115ccd50174d68b2b397bf3d5c50a4ae0f944d4",
                 "shasum": ""
             },
             "require": {
@@ -5981,9 +5981,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Treblle/php-utils/issues",
-                "source": "https://github.com/Treblle/php-utils/tree/0.3.0"
+                "source": "https://github.com/Treblle/php-utils/tree/0.3.1"
             },
-            "time": "2024-04-04T12:55:28+00:00"
+            "time": "2024-04-19T12:12:15+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -7793,16 +7793,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.15.1",
+            "version": "v1.15.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "5f288b5e79938cc72f5c298d384e639de87507c6"
+                "reference": "2c9f8004899815f3f0ee3cb28ef7281e2b589134"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/5f288b5e79938cc72f5c298d384e639de87507c6",
-                "reference": "5f288b5e79938cc72f5c298d384e639de87507c6",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/2c9f8004899815f3f0ee3cb28ef7281e2b589134",
+                "reference": "2c9f8004899815f3f0ee3cb28ef7281e2b589134",
                 "shasum": ""
             },
             "require": {
@@ -7813,13 +7813,13 @@
                 "php": "^8.1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.52.1",
-                "illuminate/view": "^10.48.4",
-                "larastan/larastan": "^2.9.2",
+                "friendsofphp/php-cs-fixer": "^3.54.0",
+                "illuminate/view": "^10.48.8",
+                "larastan/larastan": "^2.9.5",
                 "laravel-zero/framework": "^10.3.0",
                 "mockery/mockery": "^1.6.11",
                 "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.34.5"
+                "pestphp/pest": "^2.34.7"
             },
             "bin": [
                 "builds/pint"
@@ -7855,7 +7855,7 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-04-02T14:28:47+00:00"
+            "time": "2024-04-23T15:42:34+00:00"
         },
         {
             "name": "league/container",
@@ -10668,16 +10668,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.9.1",
+            "version": "3.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "267a4405fff1d9c847134db3a3c92f1ab7f77909"
+                "reference": "aac1f6f347a5c5ac6bc98ad395007df00990f480"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/267a4405fff1d9c847134db3a3c92f1ab7f77909",
-                "reference": "267a4405fff1d9c847134db3a3c92f1ab7f77909",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/aac1f6f347a5c5ac6bc98ad395007df00990f480",
+                "reference": "aac1f6f347a5c5ac6bc98ad395007df00990f480",
                 "shasum": ""
             },
             "require": {
@@ -10744,7 +10744,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-03-31T21:03:09+00:00"
+            "time": "2024-04-23T20:25:34+00:00"
         },
         {
             "name": "symfony/cache",
