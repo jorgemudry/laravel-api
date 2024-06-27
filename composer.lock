@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c762ceb2e78b07e0569841234f206dff",
+    "content-hash": "10f85284f7930af8e136cd58dcc0e8bb",
     "packages": [
         {
             "name": "brick/math",
@@ -1311,16 +1311,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.13",
+            "version": "v10.48.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "2c6816d697a4362c09c066118addda251b70b98a"
+                "reference": "27cb4736bb7e60a5311ec73160068dfbcf98336b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/2c6816d697a4362c09c066118addda251b70b98a",
-                "reference": "2c6816d697a4362c09c066118addda251b70b98a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/27cb4736bb7e60a5311ec73160068dfbcf98336b",
+                "reference": "27cb4736bb7e60a5311ec73160068dfbcf98336b",
                 "shasum": ""
             },
             "require": {
@@ -1514,7 +1514,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-06-18T16:46:35+00:00"
+            "time": "2024-06-21T10:06:42+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -5849,16 +5849,16 @@
         },
         {
             "name": "treblle/treblle-laravel",
-            "version": "4.5.9",
+            "version": "4.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Treblle/treblle-laravel.git",
-                "reference": "6651a6d157f71a2f6fabb52df2eb4018986ca73b"
+                "reference": "0c8ccaea1840e27c230a90e43c47523dd370005b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Treblle/treblle-laravel/zipball/6651a6d157f71a2f6fabb52df2eb4018986ca73b",
-                "reference": "6651a6d157f71a2f6fabb52df2eb4018986ca73b",
+                "url": "https://api.github.com/repos/Treblle/treblle-laravel/zipball/0c8ccaea1840e27c230a90e43c47523dd370005b",
+                "reference": "0c8ccaea1840e27c230a90e43c47523dd370005b",
                 "shasum": ""
             },
             "require": {
@@ -5916,9 +5916,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Treblle/treblle-laravel/issues",
-                "source": "https://github.com/Treblle/treblle-laravel/tree/4.5.9"
+                "source": "https://github.com/Treblle/treblle-laravel/tree/4.5.10"
             },
-            "time": "2024-05-26T09:37:31+00:00"
+            "time": "2024-06-20T10:50:15+00:00"
         },
         {
             "name": "treblle/utils",
