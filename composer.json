@@ -8,7 +8,7 @@
         "php": "^8.2",
         "bugsnag/bugsnag-laravel": "^2.28",
         "guzzlehttp/guzzle": "^7.8.1",
-        "laravel/framework": "^10.48.14",
+        "laravel/framework": "^10.48.15",
         "laravel/sanctum": "^3.3.3",
         "laravel/tinker": "^2.9.0",
         "predis/predis": "^2.2.2",
