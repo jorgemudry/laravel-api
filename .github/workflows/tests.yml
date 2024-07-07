@@ -23,5 +23,8 @@ jobs:
       - name: Run composer install
         run: composer install -n --prefer-dist
 
+      - name: Create DB file
+        run: touch ./database/database.sqlite
+
       - name: Run tests
         run: ./vendor/bin/pest
