@@ -13,9 +13,7 @@ use Throwable;
 
 class ExceptionMapper
 {
-    public function __construct(protected Throwable $exception)
-    {
-    }
+    public function __construct(protected Throwable $exception) {}
 
     public static function fromThrowable(Throwable $exception): self
     {

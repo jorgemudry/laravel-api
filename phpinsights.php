@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'ide' => 'vscode',
+    'ide' => 'phpstorm',
 
     /*
     |--------------------------------------------------------------------------
@@ -95,20 +95,12 @@ return [
         LineLengthSniff::class => [
             'lineLimit' => 120,
             'absoluteLineLimit' => 120,
-            'exclude' => [
-                'app/Http/Middleware/SecurityHeaders.php',
-            ],
         ],
         FunctionLengthSniff::class => [
             'maxLinesLength' => 30,
-            'exclude' => [
-                'app/Http/Middleware/SecurityHeaders.php',
-            ],
         ],
         UnusedParameterSniff::class => [
-            'exclude' => [
-                'app/Console/Kernel.php',
-            ],
+            'exclude' => [],
         ],
         SuperfluousExceptionNamingSniff::class => [
             'exclude' => [

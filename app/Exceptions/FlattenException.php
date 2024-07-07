@@ -14,6 +14,9 @@ class FlattenException extends BaseFlattenException
 {
     protected Throwable $original;
 
+    /**
+     * @param array<string, string> $headers
+     */
     public static function createFromThrowable(Throwable $exception, ?int $statusCode = null, array $headers = []): static
     {
 

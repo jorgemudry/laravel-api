@@ -26,5 +26,3 @@ parameters:
       message: '#^Undefined variable: \$this$#'
       paths:
         - tests/*
-
-  checkMissingIterableValueType: false

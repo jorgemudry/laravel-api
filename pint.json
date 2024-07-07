@@ -44,6 +44,7 @@
         "ordered_imports": true,
         "phpdoc_align": {
             "align": "left"
-        }
+        },
+        "single_trait_insert_per_statement": true
     }
 }

@@ -10,8 +10,7 @@ class ErrorResponseBuilder
 {
     public function __construct(
         protected FlattenException $exception
-    ) {
-    }
+    ) {}
 
     public static function fromFlatten(FlattenException $exception): self
     {
