@@ -22,11 +22,11 @@ class ServiceReadyController
         $data = [
             'is_ready' => true,
             'status' => 200,
-            'git' => $result->output(),
+            'git' => rtrim($result->output(), PHP_EOL),
         ];
 
         try {
-            DB::connection()->getPDO();
+            DB::connection()->getPdo();
             $redis->connect();
         } catch (Exception $ex) {
             $data['status'] = 503;

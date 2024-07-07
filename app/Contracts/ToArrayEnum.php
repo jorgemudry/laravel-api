@@ -6,5 +6,8 @@ namespace App\Contracts;
 
 interface ToArrayEnum
 {
+    /**
+     * @return array<int, mixed>
+     */
     public static function toArray(): array;
 }

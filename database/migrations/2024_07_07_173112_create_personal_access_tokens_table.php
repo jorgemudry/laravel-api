@@ -8,31 +8,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class() extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('personal_access_tokens', static function (Blueprint $table): void {
-            // Table properties.
-            $table->charset = 'utf8mb4';
-            $table->collation = 'utf8mb4_unicode_ci';
-
-            // Columns.
+        Schema::create('personal_access_tokens', function (Blueprint $table): void {
             $table->id();
-            $table->ulidMorphs('tokenable');
+            $table->morphs('tokenable');
             $table->string('name');
-            $table->string('token', 64);
+            $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
-
-            // Timestamps.
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->nullable();
-
-            // Indexes.
-            $table->unique('token');
+            $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('personal_access_tokens');
