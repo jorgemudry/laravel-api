@@ -24,7 +24,7 @@
         "nunomaduro/phpinsights": "^2.11",
         "pestphp/pest": "^2.35.1",
         "pestphp/pest-plugin-laravel": "^2.4",
-        "rector/rector": "^1.2.3"
+        "rector/rector": "^1.2.4"
     },
     "autoload": {
         "psr-4": {
