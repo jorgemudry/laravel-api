@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb0d4425a162a7ec805adffd5cbb2771",
+    "content-hash": "9d4a9129d9f3ef4d70d81441496bb9ca",
     "packages": [
         {
             "name": "brick/math",
@@ -2969,16 +2969,16 @@
         },
         {
             "name": "promphp/prometheus_client_php",
-            "version": "v2.14.0",
+            "version": "v2.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PromPHP/prometheus_client_php.git",
-                "reference": "3e4811f231c1e444a21072eccae90ab40bae199e"
+                "reference": "a283aea8269287dc35313a0055480d950c59ac1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/3e4811f231c1e444a21072eccae90ab40bae199e",
-                "reference": "3e4811f231c1e444a21072eccae90ab40bae199e",
+                "url": "https://api.github.com/repos/PromPHP/prometheus_client_php/zipball/a283aea8269287dc35313a0055480d950c59ac1f",
+                "reference": "a283aea8269287dc35313a0055480d950c59ac1f",
                 "shasum": ""
             },
             "require": {
@@ -3031,9 +3031,9 @@
             "description": "Prometheus instrumentation library for PHP applications.",
             "support": {
                 "issues": "https://github.com/PromPHP/prometheus_client_php/issues",
-                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.14.0"
+                "source": "https://github.com/PromPHP/prometheus_client_php/tree/v2.14.1"
             },
-            "time": "2025-03-05T10:11:57+00:00"
+            "time": "2025-04-14T07:59:43+00:00"
         },
         {
             "name": "psr/clock",
@@ -8801,16 +8801,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.6.1",
+            "version": "5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8"
+                "reference": "92dde6a5919e34835c506ac8c523ef095a95ed62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8",
-                "reference": "e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/92dde6a5919e34835c506ac8c523ef095a95ed62",
+                "reference": "92dde6a5919e34835c506ac8c523ef095a95ed62",
                 "shasum": ""
             },
             "require": {
@@ -8859,9 +8859,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.1"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.2"
             },
-            "time": "2024-12-07T09:39:29+00:00"
+            "time": "2025-04-13T19:20:35+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -8970,16 +8970,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.23",
+            "version": "1.12.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "29201e7a743a6ab36f91394eab51889a82631428"
+                "reference": "338b92068f58d9f8035b76aed6cf2b9e5624c025"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/29201e7a743a6ab36f91394eab51889a82631428",
-                "reference": "29201e7a743a6ab36f91394eab51889a82631428",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/338b92068f58d9f8035b76aed6cf2b9e5624c025",
+                "reference": "338b92068f58d9f8035b76aed6cf2b9e5624c025",
                 "shasum": ""
             },
             "require": {
@@ -9024,7 +9024,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-23T14:57:32+00:00"
+            "time": "2025-04-16T13:01:53+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -11065,16 +11065,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.12.1",
+            "version": "3.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "ea16a1f3719783345febd3aab41beb55c8c84bfd"
+                "reference": "6d4cf6032d4b718f168c90a96e36c7d0eaacb2aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ea16a1f3719783345febd3aab41beb55c8c84bfd",
-                "reference": "ea16a1f3719783345febd3aab41beb55c8c84bfd",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/6d4cf6032d4b718f168c90a96e36c7d0eaacb2aa",
+                "reference": "6d4cf6032d4b718f168c90a96e36c7d0eaacb2aa",
                 "shasum": ""
             },
             "require": {
@@ -11145,7 +11145,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-04-04T12:57:55+00:00"
+            "time": "2025-04-13T04:10:18+00:00"
         },
         {
             "name": "symfony/cache",
