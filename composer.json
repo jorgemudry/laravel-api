@@ -8,10 +8,10 @@
         "php": "^8.3",
         "bugsnag/bugsnag-laravel": "^2.29.0",
         "guzzlehttp/guzzle": "^7.9.3",
-        "laravel/framework": "^11.44.4",
-        "laravel/sanctum": "^4.1.0",
+        "laravel/framework": "^11.44.7",
+        "laravel/sanctum": "^4.1.1",
         "laravel/tinker": "^2.10.1",
-        "predis/predis": "^2.3.0",
+        "predis/predis": "^2.4.0",
         "promphp/prometheus_client_php": "^2.14.1",
         "treblle/treblle-laravel": "^4.6.44"
     },
