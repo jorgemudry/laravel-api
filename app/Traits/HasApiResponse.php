@@ -38,7 +38,7 @@ trait HasApiResponse
         if (array_key_exists('meta', $content)) {
             $meta = $content['meta'];
 
-            //in order to prevent large responses, "links" property inside meta is removed
+            // in order to prevent large responses, "links" property inside meta is removed
             unset($meta['links']);
 
             $content['pagination'] = $meta;
