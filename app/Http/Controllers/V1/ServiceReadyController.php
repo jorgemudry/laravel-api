@@ -22,7 +22,7 @@ class ServiceReadyController
         $data = [
             'is_ready' => true,
             'status' => 200,
-            'git' => rtrim($result->output(), PHP_EOL),
+            'git' => mb_rtrim($result->output(), PHP_EOL),
         ];
 
         try {

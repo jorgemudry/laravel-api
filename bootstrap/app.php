@@ -18,12 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->group('web', []);
         $middleware->group('api', [
+            App\Http\Middleware\ForceJsonResponse::class,
             Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             // \Illuminate\Routing\Middleware\ThrottleRequestsWithRedis::class . ':api',
             Illuminate\Routing\Middleware\SubstituteBindings::class,
             // TreblleMiddleware::class,
             'cache.headers:public;max_age=2628000;etag',
-            App\Http\Middleware\ForceJsonResponse::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

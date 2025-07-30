@@ -114,7 +114,7 @@ class PreCommitCommand extends Command
     {
         foreach ($files as $file) {
             $this->components->task($file, function () use ($file) {
-                $base = rtrim(base_path(), '/');
+                $base = mb_rtrim(base_path(), '/');
                 $process = Process::run(sprintf(self::PINT_COMMAND, $base, $file));
 
                 if ($process->failed()) {
@@ -135,7 +135,7 @@ class PreCommitCommand extends Command
     {
         foreach ($files as $file) {
             $this->components->task($file, function () use ($file) {
-                $base = rtrim(base_path(), '/');
+                $base = mb_rtrim(base_path(), '/');
                 $process = Process::run(sprintf(self::PHP_STAN_COMMAND, $base, $file));
 
                 if ($process->failed()) {

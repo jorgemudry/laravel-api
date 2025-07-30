@@ -16,6 +16,9 @@ parameters:
   scanFiles:
     - tests/Pest.php
 
+  checkMissingTypehints: true
+  inferPrivatePropertyTypeFromConstructor: true
+
   ignoreErrors:
     -
       message: '#Class PHP_CodeSniffer\\Standards\\Generic\\Sniffs\\Files\\LineLengthSniff not found.#'
@@ -24,6 +27,9 @@ parameters:
     # Pest implicitly binds $this to the current test case
     # @see https://pestphp.com/docs/underlying-test-case
     -
-      message: "#Call to an undefined method PHPUnit\\\\Framework\\\\TestCase::.*#"
-      paths:
-        - tests/*
+      message: '#Call to an undefined method PHPUnit\\Framework\\TestCase::.*#'
+      path: *tests/*
+
+    -
+      message: '#Access to an undefined property PHPUnit\\Framework\\TestCase::.*#'
+      path: *tests/*
