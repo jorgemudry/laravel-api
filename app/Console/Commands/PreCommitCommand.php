@@ -75,7 +75,7 @@ class PreCommitCommand extends Command
             ->env([
                 'APP_ENV' => 'testing',
                 'BCRYPT_ROUNDS' => '4',
-                'CACHE_DRIVER' => 'array',
+                'CACHE_STORE' => 'array',
                 'DB_CONNECTION' => 'sqlite',
                 'DB_DATABASE' => ':memory:',
                 'MAIL_MAILER' => 'array',
