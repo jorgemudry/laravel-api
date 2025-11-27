@@ -8,9 +8,9 @@
         "php": "^8.3",
         "bugsnag/bugsnag-laravel": "^2.29.0",
         "guzzlehttp/guzzle": "^7.10.0",
-        "laravel/framework": "^12.39.0",
-        "laravel/sanctum": "^4.2.0",
-        "laravel/tinker": "^2.10.1",
+        "laravel/framework": "^12.40.2",
+        "laravel/sanctum": "^4.2.1",
+        "laravel/tinker": "^2.10.2",
         "predis/predis": "^2.4.1",
         "promphp/prometheus_client_php": "^2.14.1",
         "treblle/treblle-laravel": "^4.6.44"
@@ -18,8 +18,8 @@
     "require-dev": {
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.8.0",
-        "laravel/pail": "^1.2.3",
-        "laravel/pint": "^1.25.1",
+        "laravel/pail": "^1.2.4",
+        "laravel/pint": "^1.26.0",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.3",
         "nunomaduro/phpinsights": "^2.13.3",
