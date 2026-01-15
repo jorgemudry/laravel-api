@@ -8,8 +8,8 @@
         "php": "^8.3",
         "bugsnag/bugsnag-laravel": "^2.29.0",
         "guzzlehttp/guzzle": "^7.10.0",
-        "laravel/framework": "^12.46.0",
-        "laravel/sanctum": "^4.2.2",
+        "laravel/framework": "^12.47.0",
+        "laravel/sanctum": "^4.2.3",
         "laravel/tinker": "^2.11.0",
         "predis/predis": "^2.4.1",
         "promphp/prometheus_client_php": "^2.14.1",
@@ -25,7 +25,7 @@
         "nunomaduro/phpinsights": "^2.13.3",
         "pestphp/pest": "^3.8.4",
         "pestphp/pest-plugin-laravel": "^3.2",
-        "rector/rector": "^2.3.0"
+        "rector/rector": "^2.3.1"
     },
     "autoload": {
         "psr-4": {
