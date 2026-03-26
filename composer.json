@@ -12,7 +12,7 @@
         "laravel/sanctum": "^4.3.1",
         "laravel/tinker": "^2.11.1",
         "predis/predis": "^2.4.1",
-        "promphp/prometheus_client_php": "^2.14.1",
+        "promphp/prometheus_client_php": "^2.15.0",
         "treblle/treblle-laravel": "^4.6.44"
     },
     "require-dev": {
