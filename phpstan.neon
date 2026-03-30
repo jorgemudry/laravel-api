@@ -33,3 +33,30 @@ parameters:
     -
       message: '#Access to an undefined property PHPUnit\\Framework\\TestCase::.*#'
       path: *tests/*
+      reportUnmatched: false
+
+    # Pest arch() expectations use dynamic method chaining
+    -
+      message: '#Call to an undefined method Pest\\PendingCalls\\TestCall::expect\(\).#'
+      path: *tests/Arch/*
+
+    # Pest expectation chain methods
+    -
+      message: '#Access to an undefined property Pest\\Mixins\\Expectation.*#'
+      path: *tests/*
+      reportUnmatched: false
+
+    # Mockery dynamic method returns
+    -
+      message: '#Call to an undefined method Mockery\\ExpectationInterface\|Mockery\\HigherOrderMessage::andReturn\(\).#'
+      path: *tests/*
+
+    # Mockery mock type coercion
+    -
+      message: '#Parameter .* expects .*, Mockery\\MockInterface given.#'
+      path: *tests/*
+
+    # Nullable return from getPrevious()
+    -
+      message: '#Cannot call method getMessage\(\) on Symfony\\Component\\ErrorHandler\\Exception\\FlattenException\|null.#'
+      path: *tests/*

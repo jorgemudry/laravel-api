@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Providers\AppServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+    AppServiceProvider::class,
 ];

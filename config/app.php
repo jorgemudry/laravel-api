@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Session\SessionServiceProvider;
-use Illuminate\Support\ServiceProvider;
-
 return [
 
     /*
@@ -70,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE', 'UTC'),
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +103,7 @@ return [
 
     'previous_keys' => [
         ...array_filter(
-            explode(',', strval(env('APP_PREVIOUS_KEYS', '')))
+            explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
 
@@ -128,18 +125,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'providers' => ServiceProvider::defaultProviders()
-        ->except([
-            SessionServiceProvider::class,
-            Illuminate\Cookie\CookieServiceProvider::class,
-            Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
-        ]) // remove this
-        ->merge([
-            // Package Service Providers...
-        ])->merge([
-            // Application Service Providers...
-            // App\Providers\AppServiceProvider::class,
-        ])->merge([
-            // Added Service Providers (Do not remove this line)...
-        ])->toArray(),
 ];
