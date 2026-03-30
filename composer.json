@@ -1,30 +1,35 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "jorgemudry/laravel-api",
     "type": "project",
     "description": "A Laravel version to be used on new projects, with some tweaks to make it more API oriented.",
-    "keywords": ["framework", "laravel", "api"],
+    "keywords": [
+        "framework",
+        "laravel",
+        "api"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
-        "bugsnag/bugsnag-laravel": "^2.29.0",
+        "php": "^8.4",
         "guzzlehttp/guzzle": "^7.10.0",
-        "laravel/framework": "^12.55.1",
+        "laravel/framework": "^13.2",
         "laravel/sanctum": "^4.3.1",
-        "laravel/tinker": "^2.11.1",
+        "laravel/tinker": "^3.0",
         "predis/predis": "^2.4.1",
         "promphp/prometheus_client_php": "^2.15.0",
-        "treblle/treblle-laravel": "^4.6.44"
+        "treblle/treblle-laravel": "^6.0.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.9.3",
+        "laravel/boost": "^2.4.1",
         "laravel/pail": "^1.2.6",
-        "laravel/pint": "^1.29.0",
+        "laravel/pint": "^1.29",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.9.1",
         "nunomaduro/phpinsights": "^2.14.0",
-        "pestphp/pest": "^3.8.6",
-        "pestphp/pest-plugin-laravel": "^3.2",
+        "pestphp/pest": "^4.4.3",
+        "pestphp/pest-plugin-laravel": "^4.1",
         "rector/rector": "^2.3.9"
     },
     "autoload": {
@@ -40,12 +45,32 @@
         }
     },
     "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --ansi"
+        ],
+        "post-install-cmd": [
+            "./dev/hooks/install"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -55,16 +80,8 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "post-install-cmd": [
-            "./dev/hooks/install"
-        ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
-        ],
-        "test": [
-            "@php artisan config:clear --ansi",
-            "@php artisan test"
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ]
     },
     "extra": {
