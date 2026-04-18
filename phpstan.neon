@@ -27,18 +27,13 @@ parameters:
     # Pest implicitly binds $this to the current test case
     # @see https://pestphp.com/docs/underlying-test-case
     -
-      message: '#Call to an undefined method PHPUnit\\Framework\\TestCase::.*#'
+      message: '#Call to an undefined method Pest\\PendingCalls\\TestCall::.*#'
       path: *tests/*
 
     -
-      message: '#Access to an undefined property PHPUnit\\Framework\\TestCase::.*#'
+      message: '#Access to an undefined property Pest\\PendingCalls\\TestCall::.*#'
       path: *tests/*
       reportUnmatched: false
-
-    # Pest arch() expectations use dynamic method chaining
-    -
-      message: '#Call to an undefined method Pest\\PendingCalls\\TestCall::expect\(\).#'
-      path: *tests/Arch/*
 
     # Pest expectation chain methods
     -
