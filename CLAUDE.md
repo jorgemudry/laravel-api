@@ -1,3 +1,68 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Purpose
+
+An API-oriented Laravel 13 starter template (PHP 8.5). Ships with a custom JSON exception pipeline, Prometheus metrics, route versioning, and a pre-commit command that lints/analyses/tests staged PHP files. There is no frontend; the `api` middleware group forces JSON responses on every route.
+
+## Common Commands
+
+- **Run tests**: `php artisan test --compact` (or `composer test`, which clears config first). Filter with `--filter=testName`.
+- **Single Pest run with parallelism** (matches pre-commit): `./vendor/bin/pest --parallel`.
+- **Static analysis**: `vendor/bin/phpstan` (level 8, scans `app/ tests/ routes/ database/ config/`).
+- **Formatter**: `vendor/bin/pint --format agent` (full) or `vendor/bin/pint --dirty --format agent` (changed files only). Never use `--test`.
+- **Local dev stack** (server + queue worker + `pail` logs + vite): `composer dev`.
+- **Pre-commit gate** (lint → Pint → PHPStan → Pest on staged `.php` files): `php artisan dev:precommit`.
+- **Install git hooks** (pre-commit + post-merge): `./dev/hooks/install`. Runs automatically via the composer `post-install-cmd`.
+
+Test DB defaults to SQLite in-memory via `phpunit.xml` env vars. `RefreshDatabase` is not enabled globally in `tests/Pest.php` — opt in per test if you touch the DB.
+
+## Architecture
+
+### Request entry & routing
+- `bootstrap/app.php` registers **only** the `api` route file with an empty `apiPrefix`, so every route is API-first.
+- `routes/api.php` delegates to `routes/v1/api.php` under prefix `v1` and name prefix `v1:`.
+- `routes/v1/api.php` further groups `service/*` (health) and `metrics/*` (Prometheus) into their own files.
+- The `api` middleware group applies: `ForceJsonResponse` → `ThrottleRequests:api` → `SubstituteBindings` → public cache headers. The `api` rate limiter is defined in `AppServiceProvider::boot` (60/min, keyed by `user()->id` or IP). The commented `TreblleMiddleware` and `ThrottleRequestsWithRedis` lines show the intended opt-in swaps.
+
+### Exception pipeline (JSON-only)
+`bootstrap/app.php` forces JSON rendering for *all* exceptions via this chain:
+
+1. `FlattenException::createFromThrowable($e)` — extended Symfony flatten exception that also retains the `$original` throwable.
+2. `ExceptionMapper::fromThrowable($e)->map(...)` — maps `ModelNotFoundException`/`AuthorizationException`/`AuthenticationException`/`ValidationException` to the correct HTTP status and sets a default message when empty.
+3. `ErrorResponseBuilder::fromFlatten(...)->build(debug: config('app.debug'))` — injects an `x-app-debug` header.
+4. `ExceptionResource` — final JSON shape: `{status, type, error}`, adds `fields` for validation errors, adds `file/line/trace` when debug is on. `withResponse()` unwraps the resource `data` envelope so the body is flat.
+
+When adding a new exception type, extend `Symfony\Component\HttpKernel\Exception\HttpException` (enforced by `tests/Arch/ArchitectureTest.php`) — unless it's one of the three helper classes in `App\Exceptions` that are whitelisted. If a new core exception should map to a specific HTTP status, add it to `ExceptionMapper::setStatusCode()`.
+
+### V1 controllers
+All `App\Http\Controllers\V1\*` classes **must be invokable** (single `__invoke`) — enforced by an arch test. Current controllers: `ServiceAliveController`, `ServiceReadyController`, `PrometheusMetricsController`.
+
+### Prometheus
+`App\Prometheus\Prom` is a Facade over `Prometheus\CollectorRegistry`. The controller renders metrics with `RenderTextFormat`. Note the `Prom::fake()` stub is currently a no-op placeholder.
+
+### API response envelope
+Use `App\Traits\HasApiResponse::response(JsonResource)` when returning resource responses — it adds a `metadata: {code, message}` block and renames paginator `meta` → `pagination` (dropping `meta.links` to keep payloads small). Follow this shape for any new paged endpoints.
+
+### Models
+- `App\Models\UnGuardedModel` is the shared base: `HasUlids` + `$guarded = []`. New models that want ULID PKs and unguarded mass assignment should extend it instead of `Illuminate\Database\Eloquent\Model`.
+- `Model::shouldBeStrict()` is enabled outside production (`AppServiceProvider`), so lazy-loading and missing-attribute access will throw in local/test — fix the N+1 rather than silencing it.
+
+### Enums
+Every enum in `App\Enums` must implement `App\Contracts\ToArrayEnum` (enforced by arch test). Use the `App\Traits\HasToArrayEnum` trait for the default implementation, TitleCase keys.
+
+### Architecture tests (`tests/Arch/ArchitectureTest.php`)
+These run as part of the normal suite and enforce: `strict_types` on all `App/*`, invokable V1 controllers, `ToArrayEnum` contract, no debug functions (`dd`, `dump`, `ray`, `var_dump`, `print_r`) anywhere, and `HttpException` base class for app exceptions (with the three helper whitelist). Update this file when you add architectural rules — don't add ad-hoc rules elsewhere.
+
+## Conventions
+
+- `declare(strict_types=1);` is required on every PHP file in `app/` (arch test enforces it).
+- Pint config (`pint.json`) extends the `laravel` preset and additionally enforces: strict comparisons (`===`), arrow functions, `mb_*` string helpers, sorted imports, fully qualified strict types, and global namespace imports (classes/constants/functions).
+- PHPStan runs at **level 8** with `checkMissingTypehints: true`. Don't suppress — add proper types.
+- Pre-commit `php artisan dev:precommit` auto-runs Pint against staged files and re-`git add`s them, so formatting failures self-heal on commit.
+- `.github/workflows/composer.yml` runs `composer update && composer bump` on a weekly cron and commits `composer.json`/`composer.lock` as `GitHub Action` — expect periodic dependency bumps on `master`.
+
 <laravel-boost-guidelines>
 === foundation rules ===
 
@@ -9,7 +74,7 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.4
+- php - 8.5
 - laravel/framework (LARAVEL) - v13
 - laravel/prompts (PROMPTS) - v0
 - laravel/sanctum (SANCTUM) - v4
