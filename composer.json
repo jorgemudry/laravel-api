@@ -12,25 +12,25 @@
     "require": {
         "php": "^8.4",
         "guzzlehttp/guzzle": "^7.10.0",
-        "laravel/framework": "^13.2",
+        "laravel/framework": "^13.5",
         "laravel/sanctum": "^4.3.1",
-        "laravel/tinker": "^3.0",
+        "laravel/tinker": "^3.0.2",
         "predis/predis": "^2.4.1",
         "promphp/prometheus_client_php": "^2.15.0",
         "treblle/treblle-laravel": "^6.0.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24.1",
-        "larastan/larastan": "^3.9.3",
-        "laravel/boost": "^2.4.1",
+        "larastan/larastan": "^3.9.6",
+        "laravel/boost": "^2.4.4",
         "laravel/pail": "^1.2.6",
         "laravel/pint": "^1.29",
         "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^8.9.1",
-        "nunomaduro/phpinsights": "^2.14.0",
-        "pestphp/pest": "^4.4.3",
+        "nunomaduro/collision": "^8.9.3",
+        "nunomaduro/phpinsights": "^2.14.2",
+        "pestphp/pest": "^4.6.3",
         "pestphp/pest-plugin-laravel": "^4.1",
-        "rector/rector": "^2.3.9"
+        "rector/rector": "^2.4.2"
     },
     "autoload": {
         "psr-4": {
